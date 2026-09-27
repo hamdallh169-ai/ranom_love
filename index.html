@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إلى رنوم ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,#43172f 0%,#1b0b15 45%,#080509 100%);
+  color:white;
+  font-family:Tahoma,Arial,sans-serif;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+.container{
+  position:relative;
+  z-index:2;
+  width:92%;
+  max-width:700px;
+  margin:auto;
+  padding:40px 0 70px;
+}
+
+.hero{
+  min-height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.heart{
+  font-size:85px;
+  animation:beat 1.4s infinite;
+  filter:drop-shadow(0 0 25px #ff3f7f);
+}
+
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.16)}
+}
+
+.small{
+  margin-top:25px;
+  color:#cdaab9;
+  font-size:14px;
+}
+
+h1{
+  margin-top:10px;
+  font-size:55px;
+  color:#ff9fbd;
+  text-shadow:0 0 30px rgba(255,80,140,.4);
+}
+
+.intro{
+  margin-top:18px;
+  max-width:520px;
+  color:#eadbe1;
+  line-height:2;
+  font-size:17px;
+}
+
+.btn{
+  margin-top:30px;
+  padding:15px 35px;
+  border:0;
+  border-radius:50px;
+  background:linear-gradient(135deg,#ff477f,#9b2b61);
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 10px 35px rgba(255,50,120,.3);
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+}
+
+#gift{
+  display:none;
+  animation:appear 1s ease;
+}
+
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card{
+  margin-top:25px;
+  padding:30px 24px;
+  border-radius:28px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(15px);
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.card h2{
+  text-align:center;
+  color:#ffa3c0;
+  margin-bottom:20px;
+}
+
+.message{
+  color:#f8e9ef;
+  line-height:2.2;
+  font-size:17px;
+}
+
+.center{
+  text-align:center;
+}
+
+.secret{
+  display:none;
+  margin-top:25px;
+  padding:25px 18px;
+  border-radius:20px;
+  background:rgba(255,70,130,.08);
+  border:1px solid rgba(255,150,190,.2);
+  animation:appear .7s ease;
+}
+
+.secret p{
+  line-height:2.2;
+  color:#ffe7ef;
+}
+
+.final{
+  text-align:center;
+  margin-top:45px;
+}
+
+.final-heart{
+  font-size:50px;
+  animation:beat 1.3s infinite;
+}
+
+.signature{
+  margin-top:15px;
+  color:#ff9fbd;
+  font-size:19px;
+}
+
+.floating{
+  position:fixed;
+  bottom:-40px;
+  z-index:1;
+  pointer-events:none;
+  animation:float 6s linear forwards;
+}
+
+@keyframes float{
+  0%{
+    transform:translateY(0) rotate(0);
+    opacity:0;
+  }
+  15%{opacity:.9}
+  100%{
+    transform:translateY(-110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+.footer{
+  text-align:center;
+  margin-top:50px;
+  color:#745e68;
+  font-size:12px;
+}
+
+@media(max-width:500px){
+  h1{font-size:45px}
+  .heart{font-size:70px}
+  .message{font-size:16px}
+  .card{padding:26px 19px}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container">
+
+  <!-- شاشة البداية -->
+
+  <section class="hero" id="welcome">
+
+    <div class="heart">❤️</div>
+
+    <div class="small">
+      في شيء صغير عملته إلك...
+    </div>
+
+    <h1>رنوم</h1>
+
+    <p class="intro">
+      يمكن هاي مجرد صفحة على شاشة،
+      بس كل كلمة فيها إلها معنى،
+      وكلها معمولة عشانك.
+    </p>
+
+    <button class="btn" onclick="openGift()">
+      افتحي هديتك ❤️
+    </button>
+
+  </section>
+
+
+  <!-- الهدية -->
+
+  <section id="gift">
+
+    <div class="card">
+
+      <h2>إلك يا رنوم 💌</h2>
+
+      <p class="message">
+
+        رنوم،
+
+        <br><br>
+
+        يمكن ما بعرف دايمًا أرتب الكلام بالطريقة
+        اللي بقلبي، بس اليوم حبيت أعمل إشي
+        بسيط يخليكي تعرفي قدّيش إلك مكانة خاصة.
+
+        <br><br>
+
+        في أشخاص بنقابلهم وبيمروا مرور عادي،
+        وفي أشخاص وجودهم بترك أثر ما بننساه.
+
+        <br><br>
+
+        وإنتِ من الأشخاص اللي وجودهم إله معنى.
+
+        <br><br>
+
+        بحب التفاصيل الصغيرة فيكِ،
+        بحب ضحكتك،
+        وبحب اللحظات اللي بتخليني أبتسم
+        لمجرد إني تذكرتك.
+
+        <br><br>
+
+        ويمكن الهدية هاي بسيطة،
+        بس صدقيني كل كلمة فيها مكتوبة
+        وأنا بفكر فيكِ.
+
+        <br><br>
+
+        أهم شيء بدي إياكي تعرفيه:
+
+        <br><br>
+
+        <strong style="color:#ffabc6">
+          إنتِ غالية... أكثر مما ممكن أوصف بالكلام. ❤️
+        </strong>
+
+      </p>
+
+    </div>
+
+
+    <div class="card center">
+
+      <h2>في شيء مخبّى إلك 👀❤️</h2>
+
+      <p class="message">
+        بس لازم تضغطي الزر عشان تعرفيه.
+      </p>
+
+      <button class="btn" onclick="surprise()">
+        اضغطي هون ❤️
+      </button>
+
+      <div class="secret" id="secret">
+
+        <p>
+
+          رنوم...
+
+          <br><br>
+
+          لو سألتيني شو بتمنى إلك،
+          بتمنى تكون أيامك حلوة،
+          وقلبك مرتاح،
+          وضحكتك دايمًا موجودة.
+
+          <br><br>
+
+          وإذا قدرت أكون سبب بابتسامة صغيرة
+          على وجهك اليوم،
+          فبالنسبة إلي هاي الهدية نجحت. ❤️
+
+          <br><br>
+
+          لا تنسي إنك شخص مميز،
+          وإن في شخص عمل هاي الصفحة
+          مخصوص عشان يشوفك مبسوطة.
+
+          <br><br>
+
+          ❤️
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>كلمة أخيرة 🤍</h2>
+
+      <p class="message center">
+
+        بعض الناس بنهديهم شيء...
+
+        <br>
+
+        وبعض الناس بنحاول نهديهم
+        شعور حلو وذكرى حلوة.
+
+        <br><br>
+
+        وأنا اخترت الثانية معكِ. ❤️
+
+      </p>
+
+    </div>
+
+
+    <div class="final">
+
+      <div class="final-heart">❤️</div>
+
+      <div class="signature">
+        من حمودي... إلى رنوم ❤️
+      </div>
+
+    </div>
+
+    <div class="footer">
+      صُنعت خصيصًا لرنوم
+    </div>
+
+  </section>
+
+</div>
+
+
+<script>
+
+/* النجوم */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resize();
+window.addEventListener("resize",resize);
+
+let stars=[];
+
+for(let i=0;i<100;i++){
+  stars.push({
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
+    size:Math.random()*2,
+    speed:Math.random()*.02
+  });
+}
+
+function drawStars(){
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  stars.forEach(s=>{
+
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.size,0,Math.PI*2);
+    ctx.fillStyle="rgba(255,255,255,.7)";
+    ctx.fill();
+
+  });
+
+  requestAnimationFrame(drawStars);
+}
+
+drawStars();
+
+
+/* فتح الهدية */
+
+function openGift(){
+
+  document.getElementById("welcome").style.display="none";
+  document.getElementById("gift").style.display="block";
+
+  for(let i=0;i<35;i++){
+    setTimeout(createHeart,i*70);
+  }
+
+}
+
+
+/* المفاجأة */
+
+function surprise(){
+
+  document.getElementById("secret").style.display="block";
+
+  for(let i=0;i<40;i++){
+    setTimeout(createHeart,i*50);
+  }
+
+}
+
+
+/* القلوب */
+
+function createHeart(){
+
+  const heart=document.createElement("div");
+
+  heart.className="floating";
+
+  const list=[
+    "❤️",
+    "💕",
+    "💗",
+    "💖",
+    "💘",
+    "🤍"
+  ];
+
+  heart.innerHTML=
+    list[Math.floor(Math.random()*list.length)];
+
+  heart.style.left=
+    Math.random()*100+"vw";
+
+  heart.style.fontSize=
+    (15+Math.random()*22)+"px";
+
+  heart.style.animationDuration=
+    (4+Math.random()*4)+"s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },8000);
+}
+
+
+/* قلوب تلقائية */
+
+setInterval(()=>{
+
+  if(Math.random()>.5){
+    createHeart();
+  }
+
+},1400);
+
+</script>
+
+</body>
+  </html>
